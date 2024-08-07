@@ -1,0 +1,13 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Parallel Suite Approach 01" >
+  <test name="emulator-5554">
+    <parameter name="platformName" value="ANDROID"/>
+    <parameter name="systemPort" value="8400"/>
+    <parameter name="udid" value="emulator-5554"/>
+    <classes>
+      <class name="tests.swipe.SwipeVertically"/>
+      <class name="tests.authen.AuthenticationTest"/>
+    </classes>
+  </test>
+</suite>

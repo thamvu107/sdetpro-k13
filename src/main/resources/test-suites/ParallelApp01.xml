@@ -1,0 +1,31 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Parallel Suite Approach 01" parallel="tests" thread-count="10">
+  <test name="emulator-5554">
+    <parameter name="platformName" value="ANDROID"/>
+    <parameter name="systemPort" value="8400"/>
+    <parameter name="udid" value="emulator-5554"/>
+    <classes>
+      <class name="tests.swipe.SwipeVertically"/>
+      <class name="tests.authen.AuthenticationTest"/>
+    </classes>
+  </test>
+  <test name="physical 11">
+    <parameter name="platformName" value="ANDROID"/>
+    <parameter name="systemPort" value="8501"/>
+    <parameter name="udid" value="192.168.1.11:5555"/>
+    <classes>
+      <class name="tests.swipe.SwipeVertically"/>
+      <class name="tests.authen.AuthenticationTest"/>
+    </classes>
+  </test>
+<!--  <test name="IOS">-->
+<!--    <parameter name="platformName" value="IOS"/>-->
+<!--    <parameter name="platformVersion" value="17.2"/>-->
+<!--    <parameter name="systemPort" value="8200"/>-->
+<!--    <parameter name="udid" value="iPhone 15 Pro Max"/>-->
+<!--    <classes>-->
+<!--      <class name="tests.authen.AuthenticationTest"/>-->
+<!--    </classes>-->
+<!--  </test>-->
+</suite>

@@ -1,0 +1,40 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Parallel Suite Approach 01" parallel="tests" thread-count="10">
+  <test name="physical 11">
+    <parameter name="platformName" value="ANDROID"/>
+    <parameter name="systemPort" value="8500"/>
+    <parameter name="udid" value="192.168.1.11:5555"/>
+    <classes>
+      <class name="tests.swipe.SwipeVertically"/>
+      <class name="tests.authen.AuthenticationTest"/>
+    </classes>
+  </test>
+  <test name="physical 16">
+    <parameter name="platformName" value="ANDROID"/>
+    <parameter name="systemPort" value="8600"/>
+    <parameter name="udid" value="192.168.1.16:5555"/>
+    <classes>
+      <class name="tests.swipe.SwipeVertically"/>
+      <class name="tests.authen.AuthenticationTest"/>
+    </classes>
+  </test>
+  <test name="physical 17">
+    <parameter name="platformName" value="ANDROID"/>
+    <parameter name="systemPort" value="8700"/>
+    <parameter name="udid" value="192.168.1.17:5555"/>
+    <classes>
+      <class name="tests.swipe.SwipeVertically"/>
+      <class name="tests.authen.AuthenticationTest"/>
+    </classes>
+  </test>
+  <test name="physical 19">
+    <parameter name="platformName" value="ANDROID"/>
+    <parameter name="systemPort" value="8800"/>
+    <parameter name="udid" value="192.168.1.19:5555"/>
+    <classes>
+      <class name="tests.swipe.SwipeVertically"/>
+      <class name="tests.authen.AuthenticationTest"/>
+    </classes>
+  </test>
+</suite>
