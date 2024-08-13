@@ -72,19 +72,7 @@ public class BaseTest {
         System.out.println("Device: " + udid + ": Before Test-------------- Init AppiumDriverSession: appiumDriver: " + appiumDriver);
 
 
-//        printDriverThreadList();
     }
-
-//    public void printDriverThreadList() {
-//        synchronized (driverThreadList) {
-//            System.out.println("driverThreadList contains " + driverThreadList.size()+ " items:");
-//            if (!driverThreadList.isEmpty()) {
-//                for (DriverFactory driverFactory : driverThreadList) {
-//                    System.out.println("DriverThreadList item: " + driverFactory.getDriver(Platform.valueOf(platformName), systemPort, udid, platformVersion));
-//                }
-//            }
-//        }
-//    }
 
     @BeforeClass
     @Parameters({"systemPort", "udid", "platformName", "platformVersion"})
@@ -104,16 +92,13 @@ public class BaseTest {
             throw new RuntimeException("BeforeClass " + getClass().getSimpleName() + " error: " + e);
         }
         System.out.println("Device: " + udid + ": Before Class-------------- Init AppiumDriverSession: appiumDriver: " + appiumDriver);
-
     }
 
     @AfterTest(alwaysRun = true)
     public void quitAppiumSession() {
 
         driverThread.get().quitAppiumDriver();
-
     }
-
 
     @AfterMethod(description = "Capture screenshot when test is failed")
     public void captureScreenshot(ITestResult results) {
@@ -151,5 +136,18 @@ public class BaseTest {
         String takenTime = year + "-" + month + "-" + day + "-" + hr + "-" + min + "-" + sec;
         return methodName + "-" + takenTime + ".png";
     }
+
+
+
+//    public void printDriverThreadList() {
+//        synchronized (driverThreadList) {
+//            System.out.println("driverThreadList contains " + driverThreadList.size()+ " items:");
+//            if (!driverThreadList.isEmpty()) {
+//                for (DriverFactory driverFactory : driverThreadList) {
+//                    System.out.println("DriverThreadList item: " + driverFactory.getDriver(Platform.valueOf(platformName), systemPort, udid, platformVersion));
+//                }
+//            }
+//        }
+//    }
 
 }
