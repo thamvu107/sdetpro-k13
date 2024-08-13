@@ -25,7 +25,7 @@ public class SwipeVertically extends BaseTest {
   @Test
   public void swipeVertically(Method method) {
 
-//    AppiumDriver appiumDriver = getDriver();
+    AppiumDriver appiumDriver = getDriver();
     System.out.println("Device: " + udid + " Class -------------: " + getClass().getSimpleName() + " test method: " + method.getName() + "appiumDriver: " + appiumDriver);
 
 
