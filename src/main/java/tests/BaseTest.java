@@ -24,53 +24,85 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 
-public class BaseTest  {
+public class BaseTest {
 
-    private static final List<DriverFactory> driverThreadPool = Collections.synchronizedList(
+    private static final List<DriverFactory> driverThreadList = Collections.synchronizedList(
             new ArrayList<>());
     private static ThreadLocal<DriverFactory> driverThread;
-    private String udid;
+    protected String udid;
     private String systemPort;
     private String platformName;
     private String platformVersion;
-
+    protected  AppiumDriver appiumDriver;
 
 
     protected AppiumDriver getDriver() {
         AppiumDriver appiumDriver = driverThread.get()
                 .getDriver(Platform.valueOf(platformName), systemPort, udid, platformVersion);
-        System.out.println("Get driver : " + appiumDriver);
 
         return appiumDriver;
     }
 
     @BeforeTest
-    public void initAppiumDriverSession() {
-        System.out.println("Before Test");
+    @Parameters({"systemPort", "udid", "platformName", "platformVersion"})
+    public void initAppiumDriverSession(String systemPort, String udid, String platformName,
+                                        @Optional("platformVersion") String platformVersion) {
+        System.out.println("Device: " + udid + ": Before Test--------------");
+
+        this.platformName = platformName;
+        this.platformVersion = platformVersion;
+        this.systemPort = systemPort;
+        this.udid = udid;
 
         driverThread = ThreadLocal.withInitial(() -> {
-            DriverFactory driverThread = new DriverFactory();
-            driverThreadPool.add(driverThread);
-            return driverThread;
-        });
+            DriverFactory driverFactory = new DriverFactory();
+            driverThreadList.add(driverFactory);
+            //System.out.println("driverThreadList add driverThread: " + driverFactory.getDriver(Platform.valueOf(platformName), systemPort, udid, platformVersion));
 
-        System.out.println("Init driver thread: " + driverThread);
+            return driverFactory;
+        });
+        appiumDriver = getDriver();
+//        printDriverThreadList();
+        //System.out.println("Device: " + udid + ": Before Test appiumDriver: " + getDriver());
     }
+
+//    public void printDriverThreadList() {
+//        synchronized (driverThreadList) {
+//            System.out.println("driverThreadList contains " + driverThreadList.size()+ " items:");
+//            if (!driverThreadList.isEmpty()) {
+//                for (DriverFactory driverFactory : driverThreadList) {
+//                    System.out.println("DriverThreadList item: " + driverFactory.getDriver(Platform.valueOf(platformName), systemPort, udid, platformVersion));
+//                }
+//            }
+//        }
+//    }
 
     @BeforeClass
     @Parameters({"systemPort", "udid", "platformName", "platformVersion"})
     public void getTestParams(String systemPort, String udid, String platformName,
                               @Optional("platformVersion") String platformVersion) {
+
+
         this.platformName = platformName;
         this.platformVersion = platformVersion;
         this.systemPort = systemPort;
         this.udid = udid;
+        appiumDriver = getDriver();
+
+//        printDriverThreadList();
+
+        //System.out.println("Device: " + udid + ": Before Class-------- " + getClass().getSimpleName() + "appiumDriver: " + getDriver());
+        System.out.println("Device: " + udid + ": Before Class-------- " + getClass().getSimpleName() );
+
     }
 
     @AfterTest(alwaysRun = true)
     public void quitAppiumSession() {
+
         driverThread.get().quitAppiumDriver();
+
     }
+
 
     @AfterMethod(description = "Capture screenshot when test is failed")
     public void captureScreenshot(ITestResult results) {

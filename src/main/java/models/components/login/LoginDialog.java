@@ -24,4 +24,9 @@ public class LoginDialog extends BasePage {
     this.wait.until(ExpectedConditions.visibilityOfElementLocated(dialogMsgLoc));
     return this.appiumDriver.findElement(dialogMsgLoc).getText();
   }
+
+  public void clickOnOKBtn(){
+    this.wait.until(ExpectedConditions.visibilityOfElementLocated(dialogBtnLoc));
+     this.appiumDriver.findElement(dialogBtnLoc).click();
+  }
 }

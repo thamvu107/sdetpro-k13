@@ -2,6 +2,8 @@ package tests.swipe;
 
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumDriver;
+
+import java.lang.reflect.Method;
 import java.time.Duration;
 import java.util.Collections;
 import org.openqa.selenium.By;
@@ -21,8 +23,11 @@ public class SwipeVertically extends BaseTest {
 
 
   @Test
-  public void swipeVertically() {
-    AppiumDriver appiumDriver = getDriver();
+  public void swipeVertically(Method method) {
+
+//    AppiumDriver appiumDriver = getDriver();
+    System.out.println("Device: " + udid + " Class -------------: " + getClass().getSimpleName() + " test method: " + method.getName() + "appiumDriver: " + appiumDriver);
+
 
     // AppiumDriver appiumDriver = getAppiumDriver();
     By formsBtnLoc = AppiumBy.accessibilityId("Forms");
@@ -40,7 +45,7 @@ public class SwipeVertically extends BaseTest {
         AppiumBy.androidUIAutomator("new UiSelector(). textContains(\"Form components\")")));
 
     // Swipe up before interacting
-    Dimension windowSize = appiumDriver.manage().window().getSize();
+    Dimension windowSize = getDriver().manage().window().getSize();
     int screenHeight = windowSize.getHeight();
     int screenWidth = windowSize.getWidth();
 

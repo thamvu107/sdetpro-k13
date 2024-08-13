@@ -1,6 +1,7 @@
 package test_flows.authentication;
 
 import io.appium.java_client.AppiumDriver;
+import models.components.login.LoginDialog;
 import models.pages.LoginPage;
 import org.apache.commons.validator.routines.EmailValidator;
 import org.testng.Assert;
@@ -60,8 +61,11 @@ public class LoginFlow extends BaseFlow {
 
   private void verifyCorrectLoginCreds() {
     String expectedSuccessMsg = "You are logged in!";
-    String actualSuccessMsg = loginPage.loginDialog().getDialogMsg();
+    LoginDialog loginDialog = loginPage.loginDialog();
+    String actualSuccessMsg = loginDialog.getDialogMsg();
     Assert.assertEquals(expectedSuccessMsg, actualSuccessMsg, "[ERR] Wrong success login msg");
+    loginDialog.clickOnOKBtn();
+
   }
 
   private void verifyIncorrectEmailLogin() {
