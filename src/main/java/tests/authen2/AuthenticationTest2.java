@@ -17,7 +17,7 @@ public class AuthenticationTest2 extends BaseTest {
   @Test(dataProvider = "loginCredData")
   public void loginWithCreds(LoginCred loginCred, Method method) {
     AppiumDriver appiumDriver = getDriver();
-    System.out.println("Device: " + udid + "Class -------------: " + getClass().getSimpleName() + ", test method: " + method.getName() + " , appiumDriver: " + appiumDriver);
+    System.out.println("Device: " + udid + " Class -------------: " + getClass().getSimpleName() + ", test method: " + method.getName() + " , appiumDriver: " + appiumDriver);
 
     LoginFlow loginFlow = new LoginFlow(
             appiumDriver, loginCred.getEmail(), loginCred.getPassword()

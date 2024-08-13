@@ -57,7 +57,6 @@ public class BaseTest {
         driverThread = ThreadLocal.withInitial(() -> {
             DriverFactory driverFactory = new DriverFactory();
             driverThreadList.add(driverFactory);
-            //System.out.println("driverThreadList add driverThread: " + driverFactory.getDriver(Platform.valueOf(platformName), systemPort, udid, platformVersion));
 
             return driverFactory;
         });
@@ -74,7 +73,6 @@ public class BaseTest {
 
 
 //        printDriverThreadList();
-        //System.out.println("Device: " + udid + ": Before Test appiumDriver: " + getDriver());
     }
 
 //    public void printDriverThreadList() {
@@ -92,7 +90,6 @@ public class BaseTest {
     @Parameters({"systemPort", "udid", "platformName", "platformVersion"})
     public void beforeClass(String systemPort, String udid, String platformName,
                               @Optional("platformVersion") String platformVersion) {
-//        System.out.println("Device: " + udid + ": Before Class--------------");
 
         this.platformName = platformName;
         this.platformVersion = platformVersion;
@@ -104,11 +101,9 @@ public class BaseTest {
         try {
             appiumDriver = getDriver();
         } catch (Exception e) {
-            throw new RuntimeException("BeforeTest " + getClass().getSimpleName() + " error: " + e);
+            throw new RuntimeException("BeforeClass " + getClass().getSimpleName() + " error: " + e);
         }
         System.out.println("Device: " + udid + ": Before Class-------------- Init AppiumDriverSession: appiumDriver: " + appiumDriver);
-
-//        System.out.println("Device: " + udid + ": Before Class-------- " + getClass().getSimpleName() );
 
     }
 

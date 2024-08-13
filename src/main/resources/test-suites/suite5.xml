@@ -9,8 +9,8 @@
             <class name="tests.swipe.SwipeVertically"/>
             <class name="tests.authen.AuthenticationTest"/>
 
-            <!--      <class name="tests.authen.AuthenticationTest1"/>-->
-            <!--      <class name="tests.authen.AuthenticationTest2"/>-->
+            <class name="tests.authen.AuthenticationTest1"/>
+            <class name="tests.authen.AuthenticationTest2"/>
             <!--      <class name="tests.authen.AuthenticationTest3"/>-->
             <!--      <class name="tests.authen.AuthenticationTest4"/>-->
             <!--      <class name="tests.authen.AuthenticationTest5"/>-->
@@ -27,8 +27,8 @@
         <parameter name="systemPort" value="8600"/>
         <parameter name="udid" value="192.168.1.13:5555"/>
         <classes>
-            <!--      <class name="tests.swipe.SwipeVertically"/>-->
-            <!--      <class name="tests.authen.AuthenticationTest"/>-->
+            <class name="tests.swipe.SwipeVertically"/>
+            <class name="tests.authen.AuthenticationTest"/>
 
             <class name="tests.authen.AuthenticationTest1"/>
             <class name="tests.authen.AuthenticationTest2"/>
@@ -37,25 +37,27 @@
             <!--      <class name="tests.authen.AuthenticationTest5"/>-->
         </classes>
     </test>
-<!--    <test name="physical 3">-->
-<!--        <parameter name="platformName" value="ANDROID"/>-->
-<!--        <parameter name="systemPort" value="8700"/>-->
-<!--        <parameter name="udid" value="192.168.1.11:5555"/>-->
-<!--        <classes>-->
-<!--            <class name="tests.authen.AuthenticationTest3"/>-->
-<!--            <class name="tests.authen.AuthenticationTest4"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+        <test name="physical 3">
+            <parameter name="platformName" value="ANDROID"/>
+            <parameter name="systemPort" value="8700"/>
+            <parameter name="udid" value="192.168.1.11:5555"/>
+            <classes>
+                <class name="tests.authen.AuthenticationTest1"/>
+                <class name="tests.authen.AuthenticationTest2"/>
+                <class name="tests.authen.AuthenticationTest3"/>
+                <class name="tests.authen.AuthenticationTest4"/>
+            </classes>
+        </test>
 
-    <!--  <test name="physical 4">-->
-    <!--    <parameter name="platformName" value="ANDROID"/>-->
-    <!--    <parameter name="systemPort" value="8800"/>-->
-    <!--    <parameter name="udid" value="192.168.13:5555"/>-->
-    <!--    <classes>-->
-    <!--      <class name="tests.swipe.SwipeVertically"/>-->
-    <!--      <class name="tests.authen.AuthenticationTest"/>-->
-    <!--    </classes>-->
-    <!--  </test>-->
+      <test name="physical 4">
+        <parameter name="platformName" value="ANDROID"/>
+        <parameter name="systemPort" value="8800"/>
+        <parameter name="udid" value="192.168.13:5555"/>
+        <classes>
+          <class name="tests.swipe.SwipeVertically"/>
+          <class name="tests.authen.AuthenticationTest"/>
+        </classes>
+      </test>
 
     <!--  <test name="physical 5">-->
     <!--    <parameter name="platformName" value="ANDROID"/>-->
