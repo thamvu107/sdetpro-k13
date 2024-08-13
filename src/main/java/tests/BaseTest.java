@@ -33,7 +33,7 @@ public class BaseTest {
     private String systemPort;
     private String platformName;
     private String platformVersion;
-    protected  AppiumDriver appiumDriver;
+//    protected  AppiumDriver appiumDriver;
 
 
     protected AppiumDriver getDriver() {
@@ -47,7 +47,7 @@ public class BaseTest {
     @Parameters({"systemPort", "udid", "platformName", "platformVersion"})
     public void initAppiumDriverSession(String systemPort, String udid, String platformName,
                                         @Optional("platformVersion") String platformVersion) {
-        System.out.println("Device: " + udid + ": Before Test--------------");
+//        System.out.println("Device: " + udid + ": Before Test--------------");
 
         this.platformName = platformName;
         this.platformVersion = platformVersion;
@@ -61,7 +61,18 @@ public class BaseTest {
 
             return driverFactory;
         });
-        appiumDriver = getDriver();
+
+        AppiumDriver appiumDriver;
+        try {
+            appiumDriver= getDriver();
+
+        } catch (Exception e) {
+            throw new RuntimeException("BeforeTest " + getClass().getSimpleName() + " error: " + e);
+
+        }
+        System.out.println("Device: " + udid + ": Before Test-------------- Init AppiumDriverSession: appiumDriver: " + appiumDriver);
+
+
 //        printDriverThreadList();
         //System.out.println("Device: " + udid + ": Before Test appiumDriver: " + getDriver());
     }
@@ -79,20 +90,25 @@ public class BaseTest {
 
     @BeforeClass
     @Parameters({"systemPort", "udid", "platformName", "platformVersion"})
-    public void getTestParams(String systemPort, String udid, String platformName,
+    public void beforeClass(String systemPort, String udid, String platformName,
                               @Optional("platformVersion") String platformVersion) {
-
+//        System.out.println("Device: " + udid + ": Before Class--------------");
 
         this.platformName = platformName;
         this.platformVersion = platformVersion;
         this.systemPort = systemPort;
         this.udid = udid;
-        appiumDriver = getDriver();
 
 //        printDriverThreadList();
+        AppiumDriver appiumDriver;
+        try {
+            appiumDriver = getDriver();
+        } catch (Exception e) {
+            throw new RuntimeException("BeforeTest " + getClass().getSimpleName() + " error: " + e);
+        }
+        System.out.println("Device: " + udid + ": Before Class-------------- Init AppiumDriverSession: appiumDriver: " + appiumDriver);
 
-        //System.out.println("Device: " + udid + ": Before Class-------- " + getClass().getSimpleName() + "appiumDriver: " + getDriver());
-        System.out.println("Device: " + udid + ": Before Class-------- " + getClass().getSimpleName() );
+//        System.out.println("Device: " + udid + ": Before Class-------- " + getClass().getSimpleName() );
 
     }
 
