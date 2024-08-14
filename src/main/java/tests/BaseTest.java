@@ -26,8 +26,7 @@ import org.testng.annotations.Parameters;
 
 public class BaseTest {
 
-    private static final List<DriverFactory> driverThreadList = Collections.synchronizedList(
-            new ArrayList<>());
+    //    private static final List<DriverFactory> driverThreadList = Collections.synchronizedList(            new ArrayList<>());
     private static ThreadLocal<DriverFactory> driverThread;
     protected String udid;
     private String systemPort;
@@ -54,22 +53,31 @@ public class BaseTest {
         this.systemPort = systemPort;
         this.udid = udid;
 
+//        driverThread = ThreadLocal.withInitial(() -> {
+//            DriverFactory driverFactory = new DriverFactory();
+//
+//            return driverFactory;
+//        });
+
+
         driverThread = ThreadLocal.withInitial(() -> {
             DriverFactory driverFactory = new DriverFactory();
-            driverThreadList.add(driverFactory);
 
             return driverFactory;
+
         });
+//        driverThread.set(new DriverFactory());
 
         AppiumDriver appiumDriver;
         try {
-            appiumDriver= getDriver();
+            appiumDriver = getDriver();
 
         } catch (Exception e) {
-            throw new RuntimeException("BeforeTest " + getClass().getSimpleName() + " error: " + e);
+            String message = " BeforeTest of Thread:" + Thread.currentThread().getName() + " Device: " + udid + " Class name: " + getClass().getSimpleName() + " Error: " + e;
+            throw new RuntimeException(message);
 
         }
-        System.out.println("Device: " + udid + ": Before Test-------------- Init AppiumDriverSession: appiumDriver: " + appiumDriver);
+        System.out.println("BeforeTest of Thread:" + Thread.currentThread().getName() + " Device: " + udid + " Init AppiumDriverSession: appiumDriver: " + appiumDriver);
 
 
     }
@@ -77,7 +85,7 @@ public class BaseTest {
     @BeforeClass
     @Parameters({"systemPort", "udid", "platformName", "platformVersion"})
     public void beforeClass(String systemPort, String udid, String platformName,
-                              @Optional("platformVersion") String platformVersion) {
+                            @Optional("platformVersion") String platformVersion) {
 
         this.platformName = platformName;
         this.platformVersion = platformVersion;
@@ -89,15 +97,17 @@ public class BaseTest {
         try {
             appiumDriver = getDriver();
         } catch (Exception e) {
-            throw new RuntimeException("BeforeClass " + getClass().getSimpleName() + " error: " + e);
+            String message = "BeforeClass of Thread:" + Thread.currentThread().getName() + " Device: " + udid + " Class name: " + getClass().getSimpleName() + " Error: " + e;
+            throw new RuntimeException(message);
         }
-        System.out.println("Device: " + udid + ": Before Class-------------- Init AppiumDriverSession: appiumDriver: " + appiumDriver);
+        System.out.println("BeforeClass of Thread:" + Thread.currentThread().getName() + " Device: " + udid + " Class name: " + getClass().getSimpleName() + " appiumDriver: " + appiumDriver);
     }
 
     @AfterTest(alwaysRun = true)
     public void quitAppiumSession() {
 
         driverThread.get().quitAppiumDriver();
+        driverThread.remove();
     }
 
     @AfterMethod(description = "Capture screenshot when test is failed")
@@ -136,7 +146,6 @@ public class BaseTest {
         String takenTime = year + "-" + month + "-" + day + "-" + hr + "-" + min + "-" + sec;
         return methodName + "-" + takenTime + ".png";
     }
-
 
 
 //    public void printDriverThreadList() {

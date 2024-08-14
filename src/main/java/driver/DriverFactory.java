@@ -137,7 +137,7 @@ public class DriverFactory {
         if (appiumDriver != null) {
             System.out.println("Device: " + appiumDriver.getCapabilities().getCapability("udid") + "quit appium driver: " + appiumDriver);
             appiumDriver.quit();
-            appiumDriver = null;
+//            appiumDriver = null; // remove driver
         }
     }
 
